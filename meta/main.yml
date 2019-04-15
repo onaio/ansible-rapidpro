@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Ona Engineering
+  description: Installs and configures RapidPro
+  company: Ona Systems Inc
+  license: Apache
+  min_ansible_version: 1.2
+  platforms:
+    - name: Ubuntu
+      versions:
+        - 18.04
+        - 16.04
+  galaxy_tags:
+    - rapidpro
+
+dependencies: []
