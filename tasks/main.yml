@@ -1,2 +1,6 @@
 ---
-# tasks file for ansible-rapidpro
+- name: Install RapidPro
+  include_tasks: install.yml
+
+- name: Init RapidPro
+  include_tasks: init.yml

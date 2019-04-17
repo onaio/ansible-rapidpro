@@ -2,4 +2,30 @@
 - name: Converge
   hosts: all
   roles:
+    - role: ANXS.postgresql
+      vars:
+        postgresql_version: 10
+        postgresql_users:
+          - name: rapidpro
+            pass: rapidpro
+            encrypted: true
+        postgresql_databases:
+          - name: rapidpro
+            owner: rapidpro
+            encoding: "UTF-8"
+            hstore: true
+            gis: true
+        postgresql_database_extensions:
+          - db: rapidpro
+            extensions:
+              - postgis
+        postgresql_ext_install_postgis: true
+        postgresql_ext_postgis_version: "2.5"
+
+    - role: DavidWittman.redis
+      vars:
+        redis_version: "2.8.9"
+
     - role: ansible-rapidpro
+      vars:
+        rapidpro_postgresql_password: rapidpro

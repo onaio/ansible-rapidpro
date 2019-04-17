@@ -1,0 +1,16 @@
+---
+- name: Install coffee-script & less packages
+  npm:
+    name: "{{ item }}"
+    state: present
+    global: true
+  with_items:
+    - less
+    - coffee-script
+
+- name: Install npm packages
+  npm:
+    path: "{{ rapidpro_checkout_path }}"
+  ignore_errors: true
+  become: true
+  become_user: "{{ rapidpro_system_user }}"
