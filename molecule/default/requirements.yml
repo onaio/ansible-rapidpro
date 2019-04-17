@@ -1,0 +1,14 @@
+---
+- src: https://github.com/onaio/ansible-django.git
+  name: onaio.django
+  version: 5a1073e5138b50a6675e7feb44e31cf9801fb47d
+  scm: git
+
+- src: https://github.com/onaio/ansible-courier.git
+  name: onaio.courier
+  version: b606d64f464447348250e1d70d609e75cd63162a
+  scm: git
+
+- src: ANXS.postgresql
+
+- src: DavidWittman.redis

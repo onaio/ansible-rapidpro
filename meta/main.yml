@@ -9,8 +9,43 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - 18.04
-        - 16.04
   galaxy_tags:
     - rapidpro
 
-dependencies: []
+dependencies:
+  - role: onaio.django
+    vars:
+      django_system_user: "{{ rapidpro_system_user }}"
+      django_system_group: "{{ rapidpro_system_group }}"
+      django_system_user_home: "{{ rapidpro_system_user_home }}"
+      django_codebase_path: "{{ rapidpro_codebase_path }}"
+      django_versioned_path: "{{ rapidpro_versioned_path }}"
+      django_checkout_path: "{{ rapidpro_checkout_path }}"
+      django_venv_path: "{{ rapidpro_venv_path }}"
+      django_git_url: "{{ rapidpro_git_url }}"
+      django_git_version: "{{ rapidpro_version }}"
+      django_pip_packages: "{{ rapidpro_pip_packages }}"
+      django_service_name: "{{ rapidpro_service_name }}"
+      django_recreate_virtual_env: "{{ rapidpro_recreate_virtual_env }}"
+      django_pip_paths:
+        - "{{ django_checkout_path }}/pip-freeze.txt"
+      django_local_settings_path: "{{ django_checkout_path }}/temba/settings.py"
+      django_settings_template_path: "{{ rapidpro_django_settings_template_path }}"
+      django_init_commands: []
+      django_static_path: "{{ django_checkout_path }}/sitestatic/"
+      django_media_path: "{{ django_system_user_home }}/media/"
+      django_settings_module: "temba.settings"
+      django_wsgi_module: "temba.wsgi:application"
+      django_celery_app: "{{ rapidpro_service_name }}"
+      django_environment_vars: "{{ rapidpro_environment_vars }}"
+      django_install_deadsnakes_ppa: "{{ rapidpro_install_deadsnakes_ppa }}"
+      django_system_wide_dependencies: "{{ rapidpro_system_wide_dependencies }}"
+    environment:
+      CPLUS_INCLUDE_PATH: "/usr/include/gdal"
+      C_INCLUDE_PATH: "/usr/include/gdal"
+
+  - role: onaio.courier
+    vars:
+      courier_environment_vars: "{{ rapidpro_courier_environment_vars }}"
+      courier_version: "{{ rapidpro_courier_version }}"
+    when: rapidpro_install_courier

@@ -1,0 +1,228 @@
+from __future__ import absolute_import, unicode_literals
+
+import copy
+import os
+import raven
+import warnings
+
+import dj_database_url
+from django.utils.translation import ugettext_lazy as _
+
+# import our default settings
+from .settings_common import *  # noqa
+import logging
+
+# -----------------------------------------------------------------------------------
+# Add a custom brand for development
+# -----------------------------------------------------------------------------------
+
+custom = copy.deepcopy(BRANDING["rapidpro.io"])
+custom["name"] = "RapidPro"
+custom["colors"] = dict(primary='#f2572c')
+custom["styles"] = ['brands/rapidpro/font/style.css', 'brands/rapidpro/less/style.less']
+custom["slug"] = "ona"
+custom["org"] = "Ona"
+custom["api_link"] = "http://{{ rapidpro_domain }}"
+custom["domain"] = "{{ rapidpro_domain }}"
+custom["email"] = "{{ rapidpro_email }}"
+custom["support_email"] = "{{ rapidpro_support_email }}"
+custom["allow_signups"] = True
+custom["welcome_packs"] = [dict(size=1000, name="Demo Account")]
+BRANDING["{{ rapidpro_domain }}"] = custom
+
+DEFAULT_BRAND = "{{ rapidpro_domain }}"
+
+# -------------------------------------------------------------------------
+# Used when creating callbacks for Twilio, Nexmo etc..
+# -------------------------------------------------------------------------
+HOSTNAME = '{{ rapidpro_domain }}'
+TEMBA_HOST = '{{ rapidpro_domain }}'
+
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+TEMPLATES[0]['OPTIONS']['debug'] = False
+COMPRESS_ENABLED = False
+COMPRESS_OFFLINE = False
+
+ALLOWED_HOSTS = [
+{% for host in rapidpro_domains|list + rapidpro_allowed_hosts|list %}
+    '{{ host }}',
+{% endfor %}
+]
+# ---------------------------------------------------------------------------
+# Redis & Cache Configuration (we expect a Redis instance on localhost)
+# ---------------------------------------------------------------------------
+REDIS_HOST = '{{ rapidpro_redis_host }}'
+
+BROKER_BACKEND = '{{ rapidpro_broker_backend }}'
+BROKER_HOST = '{{ rapidpro_broker_host }}'
+BROKER_PORT = {{ rapidpro_broker_port }}
+BROKER_VHOST = '{{ rapidpro_broker_vhost }}'
+
+BROKER_URL = '%s://%s:%s/%s' % (BROKER_BACKEND, BROKER_HOST, BROKER_PORT, BROKER_VHOST)
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        'LOCATION': BROKER_URL,
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+# ----------------------------------------------------------------------------
+# Need a PostgreSQL database on localhost with postgis extension installed.
+# ----------------------------------------------------------------------------
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': '{{ rapidpro_postgresql_database }}',
+        'USER': '{{ rapidpro_postgresql_user }}',
+        'PASSWORD': '{{ rapidpro_postgresql_password }}',
+        'HOST': '{{ rapidpro_postgresql_host }}',
+        'PORT': {{ rapidpro_redis_port }},
+        'DISABLE_SERVER_SIDE_CURSORS': {{ rapidpro_disable_server_side_cursors }},
+        'ATOMIC_REQUESTS': True,
+        'OPTIONS': {
+        }
+    }
+}
+
+# reuse our connections for up to 60 seconds
+DATABASES['default']['CONN_MAX_AGE'] = 60
+
+INTERNAL_IPS = ('127.0.0.1',)
+
+# ----------------------------------------------------------------------------
+# Load nose in development
+# ----------------------------------------------------------------------------
+# INSTALLED_APPS = INSTALLED_APPS + ('django_nose', 'storages')
+# INSTALLED_APPS = INSTALLED_APPS + ('debug_toolbar', )
+INSTALLED_APPS = INSTALLED_APPS + (
+    'storages', 'raven.contrib.django.raven_compat',
+)
+
+# ----------------------------------------------------------------------------
+# In development, add in extra logging for exceptions and the debug toolbar
+# ----------------------------------------------------------------------------
+MIDDLEWARE = (
+  'temba.middleware.ExceptionMiddleware',
+) + MIDDLEWARE
+
+# ----------------------------------------------------------------------------
+# In development, perform background tasks in the web thread (synchronously)
+# ----------------------------------------------------------------------------
+CELERY_ALWAYS_EAGER = False
+CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
+CELERY_RESULT_BACKEND = BROKER_URL
+
+ADMINS = (
+            ('RapidPro', '{{ rapidpro_admin_email }}'),
+)
+MANAGERS = ADMINS
+
+# ----------------------------------------------------------------------------
+# set the mail settings, override these in your settings.py
+# if your site was at http://temba.io, it might look like this:
+# ----------------------------------------------------------------------------
+EMAIL_HOST = '{{ rapidpro_smtp_host }}'
+EMAIL_PORT = {{ rapidpro_smtp_port }}
+EMAIL_HOST_USER = '{{ rapidpro_smtp_user }}'
+DEFAULT_FROM_EMAIL = '{{ rapidpro_smtp_default_from_email }}'
+EMAIL_HOST_PASSWORD = '{{ rapidpro_smtp_password }}'
+EMAIL_USE_TLS = {{ rapidpro_smtp_use_tls }}
+FLOW_FROM_EMAIL = '{{ rapidpro_flow_from_email }}'
+
+# where recordings and exports are stored
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STORAGE_URL = "https://"+AWS_BUCKET_DOMAIN
+AWS_STORAGE_BUCKET_NAME = '{{ rapidpro_s3_bucket }}'
+AWS_BUCKET_DOMAIN = AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com'
+AWS_ACCESS_KEY_ID = '{{ rapidpro_aws_access_key }}'
+AWS_SECRET_ACCESS_KEY = '{{ rapidpro_aws_secret_key }}'
+AWS_DEFAULT_ACL = 'public-read'
+AWS_S3_FILE_OVERWRITE = False
+S3_USE_SIGV4 = True
+AWS_S3_HOST = 's3.{{ rapidpro_s3_region }}.amazonaws.com'
+AWS_S3_SECURE_URLS = True
+
+
+######
+# DANGER: only turn this on if you know what you are doing!
+#         could cause messages to be sent to live customer aggregators
+SEND_MESSAGES = True
+
+######
+# DANGER: only turn this on if you know what you are doing!
+#         could cause external APIs to be called in test environment
+SEND_WEBHOOKS = True
+
+######
+# DANGER: only turn this on if you know what you are doing!
+#         could cause emails to be sent in test environment
+SEND_EMAILS = True
+
+######
+# DANGER: only turn this on if you know what you are doing!
+#         required for TransferTo to work
+SEND_AIRTIME = {{ rapidpro_send_airtime }}
+
+# -----------------------------------------------------------------------------------
+# This setting throws an exception if a naive datetime is used anywhere.
+# (they should always contain a timezone)
+# -----------------------------------------------------------------------------------
+warnings.filterwarnings(
+        'error', r"DateTimeField .* received a naive datetime",
+        RuntimeWarning, r'django\.db\.models\.fields')
+
+# -----------------------------------------------------------------------------------
+# Make our sitestatic URL be our static URL on development
+# -----------------------------------------------------------------------------------
+STATIC_URL = '/sitestatic/'
+MEDIA_ROOT = os.path.join('/', 'home', 'rapidpro', 'media/')
+
+DEFAULT_BRAND = '{{ rapidpro_domain }}'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'root': {
+        'level': 'WARNING',
+        'handlers': ['console'],
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'pycountry': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'django.db.backends': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+    },
+}
+
+TWITTER_API_KEY = '{{ rapidpro_twitter_api_key }}'
+TWITTER_API_SECRET = '{{ rapidpro_twitter_api_secret }}'
+
+RAVEN_CONFIG = {
+    'dsn': '{{ rapidpro_raven_dsn }}',
+    'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
+}
+
+IS_PROD = {{ rapidpro_is_prod }}
+SEGMENT_IO_KEY = '{{ rapidpro_segment_io_key }}'

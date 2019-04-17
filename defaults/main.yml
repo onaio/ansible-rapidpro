@@ -1,1 +1,113 @@
 ---
+rapidpro_version: v4.16.3
+rapidpro_domains:
+  - example.com
+rapidpro_domain: "{{ rapidpro_domains[0] }}"
+rapidpro_app_name: RapidPro
+rapidpro_slug: example
+rapidpro_org_name: Example
+rapidpro_email: foo@example.com
+rapidpro_support_email: support@example.com
+rapidpro_admin_email: admin@example.com
+rapidpro_system_user: rapidpro
+rapidpro_system_group: rapidpro
+rapidpro_system_user_home: "/home/{{ rapidpro_system_user }}"
+rapidpro_service_name: "{{ rapidpro_system_user }}"
+rapidpro_recreate_virtual_env: false
+rapidpro_gdal_version: "2.2.3"
+rapidpro_system_wide_dependencies:
+  - build-essential
+  - git
+  - python3.6-dev
+  - python3-distutils
+  - libgdal-dev
+  - python3-gdal
+  - gdal-bin
+  - libxml2-dev
+  - libxslt1-dev
+  - lib32ncurses5-dev
+  - tcl8.5
+  - postgresql
+  - postgresql-contrib
+  - libpq-dev
+  - python-psycopg2
+  - nodejs
+  - npm
+  - node-less
+  - coffeescript
+rapidpro_pip_packages:
+  - celery
+  - uwsgi
+  - setuptools
+  - "gdal=={{ rapidpro_gdal_version }}"
+  - numpy
+  - requests-oauthlib
+rapidpro_init_commands:
+  - "migrate --noinput"
+  - "collectstatic --noinput"
+rapidpro_environment_vars:
+  - DATABASE_URL: "{{ rapidpro_postgresql_database_url }}"
+  - AWS_ACCESS_KEY_ID: "{{ rapidpro_aws_access_key }}"
+  - AWS_SECRET_ACCESS_KEY: "{{ rapidpro_aws_secret_key }}"
+  - RAVEN_DSN: "{{ rapidpro_raven_dsn }}"
+rapidpro_git_url: "https://github.com/rapidpro/rapidpro.git"
+rapidpro_postgresql_database_url: "postgis://{{ rapidpro_postgresql_user }}:{{ rapidpro_postgresql_password }}@{{ rapidpro_postgresql_host }}:{{ rapidpro_postgresql_port }}/{{ rapidpro_postgresql_database }}"
+rapidpro_redis_database_url: "redis://{{ rapidpro_redis_host }}:{{ rapidpro_redis_port }}/{{ rapidpro_redis_database }}"
+rapidpro_postgresql_user: "rapidpro"
+rapidpro_postgresql_password:
+rapidpro_postgresql_host: "127.0.0.1"
+rapidpro_postgresql_port: 5432
+rapidpro_postgresql_database: "rapidpro"
+rapidpro_redis_host: "127.0.0.1"
+rapidpro_redis_database: "rapidpro"
+rapidpro_redis_port: 6379
+rapidpro_broker_backend: 'redis'
+rapidpro_broker_host: "{{ rapidpro_redis_host }}"
+rapidpro_broker_port: "{{ rapidpro_redis_port }}"
+rapidpro_broker_vhost: 1
+rapidpro_install_deadsnakes_ppa: false
+rapidpro_disable_server_side_cursors: "False"
+rapidpro_s3_bucket: "rapidpro"
+rapidpro_s3_region: "eu-central-1"
+rapidpro_aws_access_key:
+rapidpro_aws_secret_key:
+rapidpro_raven_dsn:
+rapidpro_smtp_host: 127.0.0.1
+rapidpro_smtp_port: 587
+rapidpro_smtp_user: "root"
+rapidpro_smtp_password:
+rapidpro_smtp_use_tls: "True"
+rapidpro_smtp_default_from_email: "noreply@example.com"
+rapidpro_flow_from_email: "flow@example.com"
+rapidpro_allowed_hosts:
+  - "{{ ansible_hostname }}"
+rapidpro_send_airtime: "True"
+rapidpro_twitter_api_key:
+rapidpro_twitter_api_secret:
+rapidpro_is_prod: "True"
+rapidpro_segment_io_key:
+rapidpro_django_settings_template_path: "django_checkout_path/temba/settings.py.j2"
+rapidpro_codebase_path: "{{ rapidpro_system_user_home }}/app"
+rapidpro_versioned_path: "{{ rapidpro_codebase_path }}-versioned"
+rapidpro_checkout_path: "{{ rapidpro_versioned_path }}/{{ ansible_date_time['epoch'] }}"
+rapidpro_venv_path: "{{ rapidpro_system_user_home }}/.virtualenvs/{{ rapidpro_system_user }}"
+
+# Courier
+rapidpro_install_courier: true
+rapidpro_courier_version: "1.2.148"
+rapidpro_courier_domain: "{{ rapidpro_domain }}"
+rapidpro_courier_environment_vars:
+  COURIER_DOMAIN: "{{ rapidpro_courier_domain }}"
+  COURIER_SPOOL_DIR: "{{ courier_system_home }}/spool"
+  COURIER_DB: "{{ rapidpro_postgresql_database_url }}"
+  COURIER_REDIS: "{{ rapidpro_redis_database_url }}"
+  COURIER_S3_REGION: "{{ rapidpro_courier_s3_media_region }}"
+  COURIER_S3_MEDIA_BUCKET: "{{ rapidpro_courier_s3_media_bucket }}"
+  COURIER_S3_MEDIA_PREFIX: "{{ rapidpro_courier_s3_media_prefix }}"
+  COURIER_AWS_ACCESS_KEY_ID: "{{ rapidpro_aws_access_key }}"
+  COURIER_AWS_SECRET_ACCESS_KEY: "{{ rapidpro_aws_secret_key }}"
+  COURIER_SENTRY_DSN: "{{ rapidpro_courier_sentry_dsn }}"
+rapidpro_courier_sentry_dsn:
+rapidpro_courier_s3_media_bucket: "rapidpro-courier"
+rapidpro_courier_s3_media_prefix: "attachments"
+rapidpro_courier_s3_media_region: "{{ rapidpro_s3_region }}"
