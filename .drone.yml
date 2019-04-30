@@ -1,0 +1,7 @@
+---
+pipeline:
+  build:
+    image: quay.io/ansible/molecule
+    commands:
+      - pip install docker-py
+      - molecule test
