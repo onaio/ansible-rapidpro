@@ -11,6 +11,11 @@
         postgresql_databases:
           - name: rapidpro
             owner: rapidpro
+        postgresql_user_privileges:
+          - name: rapidpro
+            db: rapidpro
+            priv: "ALL"
+            role_attr_flags: "LOGIN"
 
     - role: DavidWittman.redis
 
