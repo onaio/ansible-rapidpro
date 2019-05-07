@@ -99,7 +99,7 @@ rapidpro_courier_domain: "{{ rapidpro_domain }}"
 rapidpro_courier_environment_vars:
   COURIER_DOMAIN: "{{ rapidpro_courier_domain }}"
   COURIER_SPOOL_DIR: "{{ courier_system_home }}/spool"
-  COURIER_DB: "{{ rapidpro_postgresql_database_url }}"
+  COURIER_DB: "postgres://{{ rapidpro_postgresql_user }}:{{ rapidpro_postgresql_password }}@{{ rapidpro_postgresql_host }}:{{ rapidpro_postgresql_port }}/{{ rapidpro_postgresql_database }}"
   COURIER_REDIS: "{{ rapidpro_redis_database_url }}"
   COURIER_S3_REGION: "{{ rapidpro_courier_s3_media_region }}"
   COURIER_S3_MEDIA_BUCKET: "{{ rapidpro_courier_s3_media_bucket }}"
