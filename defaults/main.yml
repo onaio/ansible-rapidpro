@@ -72,6 +72,7 @@ rapidpro_s3_region: "eu-central-1"
 rapidpro_aws_access_key:
 rapidpro_aws_secret_key:
 rapidpro_raven_dsn:
+rapidpro_mailroom_url:
 rapidpro_smtp_host: 127.0.0.1
 rapidpro_smtp_port: 587
 rapidpro_smtp_user: "root"
@@ -107,6 +108,7 @@ rapidpro_courier_environment_vars:
   COURIER_AWS_ACCESS_KEY_ID: "{{ rapidpro_aws_access_key }}"
   COURIER_AWS_SECRET_ACCESS_KEY: "{{ rapidpro_aws_secret_key }}"
   COURIER_SENTRY_DSN: "{{ rapidpro_courier_sentry_dsn }}"
+  MAILROOM_URL: "{{ rapidpro_mailroom_url }}"
 rapidpro_courier_sentry_dsn:
 rapidpro_courier_s3_media_bucket: "rapidpro-courier"
 rapidpro_courier_s3_media_prefix: "attachments"
