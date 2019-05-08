@@ -9,6 +9,8 @@
   version: b606d64f464447348250e1d70d609e75cd63162a
   scm: git
 
+- src: onaio.rapidpro_indexer
+
 - src: ANXS.postgresql
 
 - src: DavidWittman.redis

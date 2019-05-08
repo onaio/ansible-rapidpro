@@ -49,3 +49,6 @@ dependencies:
       courier_environment_vars: "{{ rapidpro_courier_environment_vars }}"
       courier_version: "{{ rapidpro_courier_version }}"
     when: rapidpro_install_courier
+
+  - role: onaio.rapidpro_indexer
+    when: rapidpro_install_indexer

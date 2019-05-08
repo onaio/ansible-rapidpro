@@ -113,3 +113,17 @@ rapidpro_courier_sentry_dsn:
 rapidpro_courier_s3_media_bucket: "rapidpro-courier"
 rapidpro_courier_s3_media_prefix: "attachments"
 rapidpro_courier_s3_media_region: "{{ rapidpro_s3_region }}"
+
+# Indexer
+rapidpro_install_indexer: true
+rapidpro_elasticsearch_url: "http://localhost:9200"
+rapidpro_indexer_version: "1.0.26"
+rapidpro_indexer_rebuild: "true"
+rapidpro_indexer_index: "contacts"
+rapidpro_indexer_poll: 5
+rapidpro_indexer_environment_vars:
+  INDEXER_DB: "postgres://{{ rapidpro_postgresql_user }}:{{ rapidpro_postgresql_password }}@{{ rapidpro_postgresql_host }}:{{ rapidpro_postgresql_port }}/{{ rapidpro_postgresql_database }}"
+  INDEXER_ELASTIC_URL: "{{ rapidpro_elasticsearch_url }}"
+  INDEXER_INDEX: "{{ rapidpro_indexer_index }}"
+  INDEXER_POLL: "{{ rapidpro_indexer_poll }}"
+  INDEXER_REBUILD: "{{ rapidpro_indexer_rebuild }}"
