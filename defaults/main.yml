@@ -15,6 +15,7 @@ rapidpro_system_user_home: "/home/{{ rapidpro_system_user }}"
 rapidpro_service_name: "{{ rapidpro_system_user }}"
 rapidpro_recreate_virtual_env: false
 rapidpro_gdal_version: "2.2.3"
+rapidpro_redis_version: "3.2.0"
 rapidpro_system_wide_dependencies:
   - build-essential
   - git
@@ -42,6 +43,7 @@ rapidpro_pip_packages:
   - "gdal=={{ rapidpro_gdal_version }}"
   - numpy
   - requests-oauthlib
+  - "redis=={{ rapidpro_redis_version }}"
 rapidpro_init_commands:
   - "migrate --noinput"
   - "collectstatic --noinput"
@@ -59,7 +61,7 @@ rapidpro_postgresql_host: "127.0.0.1"
 rapidpro_postgresql_port: 5432
 rapidpro_postgresql_database: "rapidpro"
 rapidpro_redis_host: "127.0.0.1"
-rapidpro_redis_database: "rapidpro"
+rapidpro_redis_database: "15"
 rapidpro_redis_port: 6379
 rapidpro_broker_backend: 'redis'
 rapidpro_broker_host: "{{ rapidpro_redis_host }}"
@@ -93,6 +95,7 @@ rapidpro_versioned_path: "{{ rapidpro_codebase_path }}-versioned"
 rapidpro_checkout_path: "{{ rapidpro_versioned_path }}/{{ rapidpro_version }}"
 rapidpro_venv_path: "{{ rapidpro_system_user_home }}/.virtualenvs/{{ rapidpro_system_user }}"
 rapidpro_elasticsearch_url: "http://localhost:9200"
+rapidpro_celeryd_opts: "--time-limit=300 --concurrency=1 -Q:default-node celery -Q:handler-node handler -Q:msg-node msgs -Q:flow-node flows"
 
 # Courier
 rapidpro_install_courier: true

@@ -36,7 +36,10 @@ dependencies:
       django_media_path: "{{ django_system_user_home }}/media/"
       django_settings_module: "temba.settings"
       django_wsgi_module: "temba.wsgi:application"
-      django_celery_app: "{{ rapidpro_service_name }}"
+      django_celery_app: "temba.temba_celery:app"
+      django_celeryd_nodes: "default-node handler-node msg-node flow-node"
+      django_celeryd_opts: "{{ rapidpro_celeryd_opts }}"
+      django_manage_services: true
       django_environment_vars: "{{ rapidpro_environment_vars }}"
       django_install_deadsnakes_ppa: "{{ rapidpro_install_deadsnakes_ppa }}"
       django_system_wide_dependencies: "{{ rapidpro_system_wide_dependencies }}"
