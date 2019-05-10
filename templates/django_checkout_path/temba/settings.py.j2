@@ -141,16 +141,17 @@ FLOW_FROM_EMAIL = '{{ rapidpro_flow_from_email }}'
 
 # where recordings and exports are stored
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STORAGE_URL = "https://"+AWS_BUCKET_DOMAIN
 AWS_STORAGE_BUCKET_NAME = '{{ rapidpro_s3_bucket }}'
-AWS_BUCKET_DOMAIN = AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com'
 AWS_ACCESS_KEY_ID = '{{ rapidpro_aws_access_key }}'
 AWS_SECRET_ACCESS_KEY = '{{ rapidpro_aws_secret_key }}'
 AWS_DEFAULT_ACL = 'public-read'
 AWS_S3_FILE_OVERWRITE = False
 S3_USE_SIGV4 = True
-AWS_S3_HOST = 's3.{{ rapidpro_s3_region }}.amazonaws.com'
+AWS_S3_REGION = '{{ rapidpro_s3_region }}'
+AWS_S3_ENDPOINT = '{{ rapidpro_s3_endpoint }}'
 AWS_S3_SECURE_URLS = True
+AWS_BUCKET_DOMAIN = AWS_S3_ENDPOINT
+STORAGE_URL = "https://"+AWS_BUCKET_DOMAIN
 
 
 ######

@@ -71,6 +71,7 @@ rapidpro_install_deadsnakes_ppa: false
 rapidpro_disable_server_side_cursors: "False"
 rapidpro_s3_bucket: "rapidpro"
 rapidpro_s3_region: "eu-central-1"
+rapidpro_s3_endpoint: "s3.eu-central-1.amazonaws.com"
 rapidpro_aws_access_key:
 rapidpro_aws_secret_key:
 rapidpro_raven_dsn:
@@ -109,6 +110,7 @@ rapidpro_courier_environment_vars:
   COURIER_DB: "{{ rapidpro_courier_postgresql_url }}"
   COURIER_REDIS: "{{ rapidpro_redis_database_url }}"
   COURIER_S3_REGION: "{{ rapidpro_courier_s3_media_region }}"
+  COURIER_S3_ENDPOINT: "{{ rapidpro_courier_s3_media_endpoint }}"
   COURIER_S3_MEDIA_BUCKET: "{{ rapidpro_courier_s3_media_bucket }}"
   COURIER_S3_MEDIA_PREFIX: "{{ rapidpro_courier_s3_media_prefix }}"
   COURIER_AWS_ACCESS_KEY_ID: "{{ rapidpro_aws_access_key }}"
@@ -119,6 +121,7 @@ rapidpro_courier_sentry_dsn:
 rapidpro_courier_s3_media_bucket: "{{ rapidpro_s3_bucket }}"
 rapidpro_courier_s3_media_prefix: "attachments"
 rapidpro_courier_s3_media_region: "{{ rapidpro_s3_region }}"
+rapidpro_courier_s3_media_endpoint: "{{ rapidpro_s3_endpoint }}"
 
 # Mailroom
 rapidpro_install_mailroom: true
@@ -132,6 +135,7 @@ rapidpro_mailroom_s3_force_path_style: "false"
 rapidpro_mailroom_aws_access_key_id: "{{ rapidpro_aws_access_key }}"
 rapidpro_mailroom_aws_secret_access_key: "{{ rapidpro_aws_secret_key }}"
 rapidpro_mailroom_s3_region: "{{ rapidpro_s3_region }}"
+rapidpro_mailroom_s3_endpoint: "{{ rapidpro_s3_endpoint }}"
 rapidpro_mailroom_s3_media_bucket: "{{ rapidpro_s3_region }}"
 rapidpro_mailroom_s3_endpoint:
 rapidpro_mailroom_librato_token:
