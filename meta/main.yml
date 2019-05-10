@@ -37,7 +37,7 @@ dependencies:
       django_settings_module: "temba.settings"
       django_wsgi_module: "temba.wsgi:application"
       django_celery_app: "temba.temba_celery:app"
-      django_celeryd_nodes: "default-node handler-node msg-node flow-node"
+      django_celeryd_nodes: "{{ rapidpro_celeryd_nodes }}"
       django_celeryd_opts: "{{ rapidpro_celeryd_opts }}"
       django_manage_services: true
       django_environment_vars: "{{ rapidpro_environment_vars }}"
@@ -52,3 +52,22 @@ dependencies:
       courier_environment_vars: "{{ rapidpro_courier_environment_vars }}"
       courier_version: "{{ rapidpro_courier_version }}"
     when: rapidpro_install_courier
+
+  - role: onaio.mailroom
+    vars:
+      mailroom_version: "{{ rapidpro_mailroom_version }}"
+      mailroom_postgresql_url: "{{ rapidpro_mailroom_postgresql_url }}"
+      mailroom_redis_url: "{{ rapidpro_mailroom_redis_url }}"
+      mailroom_address: "{{ rapidpro_mailroom_address }}"
+      mailroom_port: "{{ rapidpro_mailroom_port }}"
+      mailroom_sentry_dsn: "{{ rapidpro_mailroom_sentry_dsn }}"
+      mailroom_aws_access_key_id: "{{ rapidpro_mailroom_aws_access_key_id }}"
+      mailroom_aws_secret_access_key: "{{ rapidpro_mailroom_aws_secret_access_key }}"
+      mailroom_s3_endpoint: "{{ rapidpro_mailroom_s3_endpoint }}"
+      mailroom_s3_region: "{{ rapidpro_mailroom_s3_region }}"
+      mailroom_s3_disable_ssl: "{{ rapidpro_mailroom_s3_disable_ssl }}"
+      mailroom_s3_force_path_style: "{{ rapidpro_mailroom_s3_force_path_style }}"
+      mailroom_s3_media_bucket:
+      mailroom_librato_token:
+      mailroom_librato_username:
+    when: rapidpro_install_mailroom

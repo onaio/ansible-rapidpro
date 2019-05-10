@@ -74,7 +74,7 @@ rapidpro_s3_region: "eu-central-1"
 rapidpro_aws_access_key:
 rapidpro_aws_secret_key:
 rapidpro_raven_dsn:
-rapidpro_mailroom_url:
+rapidpro_mailroom_url: "http://{{ rapidpro_mailroom_address }}:{{ rapidpro_mailroom_port }}"
 rapidpro_smtp_host: 127.0.0.1
 rapidpro_smtp_port: 587
 rapidpro_smtp_user: "root"
@@ -96,6 +96,7 @@ rapidpro_checkout_path: "{{ rapidpro_versioned_path }}/{{ rapidpro_version }}"
 rapidpro_venv_path: "{{ rapidpro_system_user_home }}/.virtualenvs/{{ rapidpro_system_user }}"
 rapidpro_elasticsearch_url: "http://localhost:9200"
 rapidpro_celeryd_opts: "--time-limit=300 --concurrency=1 -Q:default-node celery -Q:handler-node handler -Q:msg-node msgs -Q:flow-node flows"
+rapidpro_celeryd_nodes: "default-node handler-node msg-node flow-node"
 
 # Courier
 rapidpro_install_courier: true
@@ -115,6 +116,24 @@ rapidpro_courier_environment_vars:
   COURIER_SENTRY_DSN: "{{ rapidpro_courier_sentry_dsn }}"
   MAILROOM_URL: "{{ rapidpro_mailroom_url }}"
 rapidpro_courier_sentry_dsn:
-rapidpro_courier_s3_media_bucket: "rapidpro-courier"
+rapidpro_courier_s3_media_bucket: "{{ rapidpro_s3_bucket }}"
 rapidpro_courier_s3_media_prefix: "attachments"
 rapidpro_courier_s3_media_region: "{{ rapidpro_s3_region }}"
+
+# Mailroom
+rapidpro_install_mailroom: true
+rapidpro_mailroom_version: "0.0.195"
+rapidpro_mailroom_port: 8081
+rapidpro_mailroom_address: 127.0.0.1
+rapidpro_mailroom_postgresql_url: "postgres://{{ rapidpro_postgresql_user }}:{{ rapidpro_postgresql_password }}@{{ rapidpro_postgresql_host }}:{{ rapidpro_postgresql_port }}/{{ rapidpro_postgresql_database }}"
+rapidpro_mailroom_redis_url: "{{ rapidpro_redis_database_url }}"
+rapidpro_mailroom_s3_disable_ssl: "false"
+rapidpro_mailroom_s3_force_path_style: "false"
+rapidpro_mailroom_aws_access_key_id: "{{ rapidpro_aws_access_key }}"
+rapidpro_mailroom_aws_secret_access_key: "{{ rapidpro_aws_secret_key }}"
+rapidpro_mailroom_s3_region: "{{ rapidpro_s3_region }}"
+rapidpro_mailroom_s3_media_bucket: "{{ rapidpro_s3_region }}"
+rapidpro_mailroom_s3_endpoint:
+rapidpro_mailroom_librato_token:
+rapidpro_mailroom_librato_username:
+rapidpro_mailroom_sentry_dsn:

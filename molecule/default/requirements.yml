@@ -9,6 +9,11 @@
   version: b606d64f464447348250e1d70d609e75cd63162a
   scm: git
 
+- src: https://github.com/onaio/ansible-mailroom.git
+  name: onaio.mailroom
+  scm: git
+  version: 31becf1c76672f7a5e0fd1a192d414b125c8b057
+
 - src: ANXS.postgresql
 
 - src: DavidWittman.redis
