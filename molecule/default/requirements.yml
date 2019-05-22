@@ -1,0 +1,22 @@
+---
+- src: https://github.com/onaio/ansible-django.git
+  name: onaio.django
+  version: 31727d858ff00dca9bc24571a6e7b2db16f2ed1c
+  scm: git
+
+- src: https://github.com/onaio/ansible-courier.git
+  name: onaio.courier
+  version: b606d64f464447348250e1d70d609e75cd63162a
+  scm: git
+
+- src: https://github.com/onaio/ansible-mailroom.git
+  name: onaio.mailroom
+  scm: git
+  version: 0baa9a193fb0d91fa727e42c7247161f3be5e5bf
+
+- src: https://github.com/onaio/postgresql.git
+  name: ANXS.postgresql
+  scm: git
+  version: d2e5860205320d1b450cf2dd3ce35bc69524e453
+
+- src: DavidWittman.redis

@@ -1,0 +1,9 @@
+---
+- name: Run RapidPro init commands
+  django_manage:
+    command: "{{ item }}"
+    app_path: "{{ rapidpro_checkout_path }}"
+    virtualenv: "{{ rapidpro_venv_path }}"
+  with_items: "{{ rapidpro_init_commands }}"
+  become: true
+  become_user: "{{ rapidpro_system_user }}"
