@@ -74,7 +74,7 @@ rapidpro_apt_python_ppa: ""
 rapidpro_disable_server_side_cursors: "False"
 rapidpro_s3_bucket: "rapidpro"
 rapidpro_s3_region: "eu-central-1"
-rapidpro_s3_endpoint: "s3.eu-central-1.amazonaws.com"
+rapidpro_s3_endpoint: "https://s3.{{ rapidpro_s3_region }}.amazonaws.com"
 rapidpro_aws_access_key:
 rapidpro_aws_secret_key:
 rapidpro_raven_dsn:
