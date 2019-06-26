@@ -153,7 +153,7 @@ S3_USE_SIGV4 = True
 AWS_S3_REGION_NAME = '{{ rapidpro_s3_region }}'
 AWS_S3_ENDPOINT_URL = '{{ rapidpro_s3_endpoint }}'
 AWS_S3_SECURE_URLS = True
-AWS_BUCKET_DOMAIN = AWS_S3_ENDPOINT_URL
+AWS_BUCKET_DOMAIN = '{{ rapidpro_s3_endpoint }}/{{ rapidpro_s3_bucket}}'
 STORAGE_URL = AWS_BUCKET_DOMAIN
 {% elif rapidpro_file_storage_backend == 'django.core.files.storage.FileSystemStorage' %}
 MEDIA_URL = 'https://{{ rapidpro_domain }}/media/'
