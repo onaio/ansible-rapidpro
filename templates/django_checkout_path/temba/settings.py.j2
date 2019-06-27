@@ -18,11 +18,11 @@ import logging
 # -----------------------------------------------------------------------------------
 
 custom = copy.deepcopy(BRANDING["rapidpro.io"])
-custom["name"] = "RapidPro"
+custom["name"] = "{{ rapidpro_app_name }}"
 custom["colors"] = dict(primary='#f2572c')
 custom["styles"] = ['brands/rapidpro/font/style.css', 'brands/rapidpro/less/style.less']
-custom["slug"] = "ona"
-custom["org"] = "Ona"
+custom["slug"] = "{{ rapidpro_slug }}"
+custom["org"] = "{{ rapidpro_org_name }}"
 custom["link"] = "https://{{ rapidpro_domain }}"
 custom["api_link"] = "https://{{ rapidpro_domain }}/api"
 custom["domain"] = "{{ rapidpro_domain }}"
