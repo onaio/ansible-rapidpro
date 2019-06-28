@@ -41,6 +41,7 @@ rapidpro_pip_packages:
   - setuptools
   - "gdal=={{ rapidpro_gdal_version }}"
   - numpy
+rapidpro_run_init_commands: true
 rapidpro_init_commands:
   - "migrate --noinput"
   - "collectstatic --noinput"
