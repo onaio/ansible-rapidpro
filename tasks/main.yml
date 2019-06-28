@@ -4,3 +4,4 @@
 
 - name: Init RapidPro
   include_tasks: init.yml
+  when: rapidpro_run_init_commands
