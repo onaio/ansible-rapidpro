@@ -51,7 +51,7 @@ rapidpro_environment_vars:
   - AWS_ACCESS_KEY_ID: "{{ rapidpro_aws_access_key }}"
   - AWS_SECRET_ACCESS_KEY: "{{ rapidpro_aws_secret_key }}"
   - RAVEN_DSN: "{{ rapidpro_raven_dsn }}"
-rapidpro_git_url: "https://github.com/nyaruka/rapidpro.git"
+rapidpro_git_url: "https://github.com/rapidpro/rapidpro.git"
 rapidpro_postgresql_database_url: "postgis://{{ rapidpro_postgresql_user }}:{{ rapidpro_postgresql_password }}@{{ rapidpro_postgresql_host }}:{{ rapidpro_postgresql_port }}/{{ rapidpro_postgresql_database }}"
 rapidpro_redis_database_url: "redis://{{ rapidpro_redis_host }}:{{ rapidpro_redis_port }}/{{ rapidpro_redis_database }}"
 rapidpro_postgresql_user: "rapidpro"
