@@ -103,7 +103,7 @@ rapidpro_venv_path: "{{ rapidpro_system_user_home }}/.virtualenvs/{{ rapidpro_sy
 # be assumed
 rapidpro_elasticsearch_url: "http://localhost:9200"
 rapidpro_celeryd_opts: "--time-limit=300 --concurrency=1 -Q:default-node celery -Q:handler-node handler -Q:msg-node msgs -Q:flow-node flows -Q:batch-node batch"
-rapidpro_celeryd_nodes: "default-node handler-node msg-node flow-node"
+rapidpro_celeryd_nodes: "default-node handler-node msg-node flow-node batch-node"
 rapidpro_celerybeat_extra_env_vars: []
 rapidpro_celeryd_extra_env_vars: []
 
