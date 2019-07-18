@@ -52,21 +52,18 @@ ALLOWED_HOSTS = [
 {% endfor %}
 ]
 # ---------------------------------------------------------------------------
-# Redis & Cache Configuration (we expect a Redis instance on localhost)
+# Celery Broker & Cache Configuration
 # ---------------------------------------------------------------------------
-REDIS_HOST = '{{ rapidpro_redis_host }}'
 
 BROKER_BACKEND = '{{ rapidpro_broker_backend }}'
-BROKER_HOST = '{{ rapidpro_broker_host }}'
-BROKER_PORT = {{ rapidpro_broker_port }}
-BROKER_VHOST = '{{ rapidpro_broker_vhost }}'
+BROKER_URL = '{{ rapidpro_broker_url }}'
 
-BROKER_URL = '%s://%s:%s/%s' % (BROKER_BACKEND, BROKER_HOST, BROKER_PORT, BROKER_VHOST)
+CACHE_URL = '{{ rapidpro_cache_url }}'
 
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        'LOCATION': BROKER_URL,
+        'LOCATION': CACHE_URL,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
@@ -122,7 +119,7 @@ MIDDLEWARE = (
 # ----------------------------------------------------------------------------
 CELERY_ALWAYS_EAGER = False
 CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
-CELERY_RESULT_BACKEND = BROKER_URL
+CELERY_RESULT_BACKEND = CACHE_URL
 
 ADMINS = (
             ('RapidPro', '{{ rapidpro_admin_email }}'),

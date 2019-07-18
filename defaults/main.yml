@@ -41,6 +41,7 @@ rapidpro_pip_packages:
   - setuptools
   - "gdal=={{ rapidpro_gdal_version }}"
   - numpy
+  - pyamqp
 rapidpro_run_init_commands: true
 rapidpro_init_commands:
   - "migrate --noinput"
@@ -70,6 +71,8 @@ rapidpro_broker_port: "{{ rapidpro_redis_port }}"
 # When different mailroom and courier may not be able to send messages
 # triggered outside a flow.
 rapidpro_broker_vhost: 15
+rapidpro_broker_url: "{{ rapidpro_broker_backend }}://{{ rapidpro_broker_host }}:{{ rapidpro_broker_port }}/{{ rapidpro_broker_vhost }}"
+rapidpro_cache_url: "redis://{{ rapidpro_redis_host }}:{{ rapidpro_redis_port }}/{{ rapidpro_redis_database }}"
 rapidpro_apt_python_ppa: ""
 rapidpro_disable_server_side_cursors: "False"
 rapidpro_s3_bucket: "rapidpro"
