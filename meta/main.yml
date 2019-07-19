@@ -15,6 +15,8 @@ galaxy_info:
 dependencies:
   - role: onaio.django
     vars:
+      django_python_source_version: "{{ rapidpro_python_source_version }}"
+      django_python_version: "{{ rapidpro_python_version }}"
       django_system_user: "{{ rapidpro_system_user }}"
       django_system_group: "{{ rapidpro_system_group }}"
       django_system_user_home: "{{ rapidpro_system_user_home }}"
