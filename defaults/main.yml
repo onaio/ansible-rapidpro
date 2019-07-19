@@ -1,5 +1,5 @@
 ---
-rapidpro_version: v4.22.43
+rapidpro_version: v5.0.9
 rapidpro_domains:
   - example.com
 rapidpro_domain: "{{ rapidpro_domains[0] }}"
@@ -16,6 +16,8 @@ rapidpro_service_name: "{{ rapidpro_system_user }}"
 rapidpro_recreate_virtual_env: false
 rapidpro_gdal_version: "2.2.3"
 rapidpro_file_storage_backend: "storages.backends.s3boto3.S3Boto3Storage"
+rapidpro_python_source_version: "3.6"
+rapidpro_python_version: "python{{ rapidpro_python_source_version }}"
 rapidpro_system_wide_dependencies:
   - build-essential
   - git
