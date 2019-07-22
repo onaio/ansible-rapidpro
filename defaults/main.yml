@@ -43,6 +43,7 @@ rapidpro_pip_packages:
   - setuptools
   - "gdal=={{ rapidpro_gdal_version }}"
   - numpy
+rapidpro_run_init_commands: true
 rapidpro_init_commands:
   - "migrate --noinput"
   - "collectstatic --noinput"
@@ -52,7 +53,7 @@ rapidpro_environment_vars:
   - AWS_ACCESS_KEY_ID: "{{ rapidpro_aws_access_key }}"
   - AWS_SECRET_ACCESS_KEY: "{{ rapidpro_aws_secret_key }}"
   - RAVEN_DSN: "{{ rapidpro_raven_dsn }}"
-rapidpro_git_url: "https://github.com/nyaruka/rapidpro.git"
+rapidpro_git_url: "https://github.com/rapidpro/rapidpro.git"
 rapidpro_postgresql_database_url: "postgis://{{ rapidpro_postgresql_user }}:{{ rapidpro_postgresql_password }}@{{ rapidpro_postgresql_host }}:{{ rapidpro_postgresql_port }}/{{ rapidpro_postgresql_database }}"
 rapidpro_redis_database_url: "redis://{{ rapidpro_redis_host }}:{{ rapidpro_redis_port }}/{{ rapidpro_redis_database }}"
 rapidpro_postgresql_user: "rapidpro"
@@ -100,9 +101,12 @@ rapidpro_codebase_path: "{{ rapidpro_system_user_home }}/app"
 rapidpro_versioned_path: "{{ rapidpro_codebase_path }}-versioned"
 rapidpro_checkout_path: "{{ rapidpro_versioned_path }}/{{ rapidpro_version }}"
 rapidpro_venv_path: "{{ rapidpro_system_user_home }}/.virtualenvs/{{ rapidpro_system_user }}"
+# Note: If elasticsearch is behind a reverse proxy and using port 80, you'll have to append
+# the port to the http url such as http://elasticsearch.example.com:80 otherwise port 9200 will
+# be assumed
 rapidpro_elasticsearch_url: "http://localhost:9200"
 rapidpro_celeryd_opts: "--time-limit=300 --concurrency=1 -Q:default-node celery -Q:handler-node handler -Q:msg-node msgs -Q:flow-node flows -Q:batch-node batch"
-rapidpro_celeryd_nodes: "default-node handler-node msg-node flow-node"
+rapidpro_celeryd_nodes: "default-node handler-node msg-node flow-node batch-node"
 rapidpro_celerybeat_extra_env_vars: []
 rapidpro_celeryd_extra_env_vars: []
 
