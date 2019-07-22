@@ -29,3 +29,28 @@
     - role: ansible-rapidpro
       vars:
         rapidpro_postgresql_password: rapidpro
+        rapidpro_apt_python_ppa: "ppa:deadsnakes/ppa"
+        rapidpro_gdal_version: "1.11.2"
+        rapidpro_system_wide_dependencies:
+          - build-essential
+          - git
+          - python3.6-dev
+          - python3-distutils-extra
+          - libgdal-dev
+          - python3-gdal
+          - gdal-bin
+          - libxml2-dev
+          - libxslt1-dev
+          - lib32ncurses5-dev
+          - tcl8.5
+          - postgresql
+          - postgresql-contrib
+          - libpq-dev
+          - python-psycopg2
+          - nodejs
+          - nodejs-legacy
+          - npm
+          - node-less
+          - coffeescript
+          - libffi6
+          - libffi-dev
