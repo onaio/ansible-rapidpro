@@ -30,13 +30,12 @@
       vars:
         rapidpro_postgresql_password: rapidpro
         rapidpro_apt_python_ppa: "ppa:deadsnakes/ppa"
-        rapidpro_python_source_version: "3.7"
         rapidpro_gdal_version: "1.11.2"
         rapidpro_system_wide_dependencies:
           - build-essential
           - git
-          - python3.7-dev
-          - python3.7-distutils
+          - python3.6-dev
+          - python3-distutils-extra
           - libgdal-dev
           - python3-gdal
           - gdal-bin
