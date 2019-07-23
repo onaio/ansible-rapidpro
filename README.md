@@ -37,9 +37,9 @@ rapidpro_mailroom_version: "0.0.195"
 ```
 
 
-### Note on ElasticSearch port
+### Note on Elasticsearch Port
 
->If elasticsearch is behind a reverse proxy and using port 80, you'll have to append the port to the http url such as http://elasticsearch.example.com:80 otherwise port 9200 will be assumed
+>If Elasticsearch is behind a reverse proxy and using port 80, you'll have to append the port to the HTTP URL such as http://elasticsearch.example.com:80 otherwise port 9200 will be assumed
 
 Dependencies
 ------------
