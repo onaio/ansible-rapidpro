@@ -216,6 +216,10 @@ LOGGING = {
         'sentry': {
             'level': 'ERROR',
             'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+        },
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler'
         }
     },
     'loggers': {
@@ -237,6 +241,10 @@ LOGGING = {
         'sentry.errors': {
             'level': 'DEBUG',
             'handlers': ['console'],
+            'propagate': False,
+        },
+        'django.security.DisallowedHost': {
+            'handlers': ['null'],
             'propagate': False,
         }
     },
