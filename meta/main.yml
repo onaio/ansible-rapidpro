@@ -58,6 +58,8 @@ dependencies:
     vars:
       courier_environment_vars: "{{ rapidpro_courier_environment_vars }}"
       courier_version: "{{ rapidpro_courier_version }}"
+      courier_bind_address: "{{ rapidpro_courier_bind_address }}"
+      courier_port: "{{ rapidpro_courier_port }}"
     when: rapidpro_install_courier
     tags:
       - courier

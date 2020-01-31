@@ -115,11 +115,14 @@ rapidpro_celeryd_extra_env_vars: []
 
 # Courier
 rapidpro_install_courier: true
+rapidpro_courier_bind_address: "127.0.0.1"
+rapidpro_courier_port: 8080
 rapidpro_courier_version: "1.2.148"
 rapidpro_courier_domain: "{{ rapidpro_domain }}"
 rapidpro_courier_postgresql_url: "postgres://{{ rapidpro_postgresql_user }}:{{ rapidpro_postgresql_password }}@{{ rapidpro_postgresql_host }}:{{ rapidpro_postgresql_port }}/{{ rapidpro_postgresql_database }}"
 rapidpro_courier_environment_vars:
   COURIER_DOMAIN: "{{ rapidpro_courier_domain }}"
+  COURIER_PORT: "{{ rapidpro_courier_port }}"
   COURIER_SPOOL_DIR: "{{ courier_system_home }}/spool"
   COURIER_DB: "{{ rapidpro_courier_postgresql_url }}"
   COURIER_REDIS: "{{ rapidpro_redis_database_url }}"
