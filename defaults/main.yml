@@ -13,8 +13,9 @@ rapidpro_system_user: rapidpro
 rapidpro_system_group: rapidpro
 rapidpro_system_user_home: "/home/{{ rapidpro_system_user }}"
 rapidpro_service_name: "{{ rapidpro_system_user }}"
+rapid_django_manage_services: true
 rapidpro_recreate_virtual_env: false
-rapidpro_gdal_version: "2.2.3"
+rapidpro_gdal_version: "2.4.2"
 rapidpro_file_storage_backend: "storages.backends.s3boto3.S3Boto3Storage"
 rapidpro_python_source_version: "3.6"
 rapidpro_python_version: "python{{ rapidpro_python_source_version }}"
@@ -23,7 +24,6 @@ rapidpro_system_wide_dependencies:
   - git
   - python3.6-dev
   - python3-distutils
-  - libgdal-dev
   - python3-gdal
   - gdal-bin
   - libxml2-dev
@@ -33,11 +33,7 @@ rapidpro_system_wide_dependencies:
   - postgresql
   - postgresql-contrib
   - libpq-dev
-  - python-psycopg2
-  - nodejs
-  - npm
-  - node-less
-  - coffeescript
+  - python3-psycopg2
 rapidpro_pip_packages:
   - uwsgi
   - setuptools

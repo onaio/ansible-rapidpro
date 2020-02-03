@@ -42,7 +42,7 @@ dependencies:
       django_celery_app: "temba.temba_celery:app"
       django_celeryd_nodes: "{{ rapidpro_celeryd_nodes }}"
       django_celeryd_opts: "{{ rapidpro_celeryd_opts }}"
-      django_manage_services: true
+      django_manage_services: "{{ rapidpro_django_manage_services }}"
       django_environment_vars: "{{ rapidpro_environment_vars }}"
       django_apt_python_ppa: "{{ rapidpro_apt_python_ppa }}"
       django_system_wide_dependencies: "{{ rapidpro_system_wide_dependencies }}"
@@ -69,3 +69,8 @@ dependencies:
     when: rapidpro_install_mailroom
     tags:
       - mailroom
+
+  - role: geerlingguy.nodejs
+    nodejs_npm_global_packages:
+      - less
+      - coffee-script
