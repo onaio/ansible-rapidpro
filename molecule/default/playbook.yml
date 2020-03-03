@@ -27,6 +27,7 @@
           - "postgresql-{{ postgresql_version }}-postgis-{{ postgresql_ext_postgis_version }}-scripts"
         postgresql_fdw_mysql_packages: "postgresql-{{ postgresql_version }}-mysql-fdw"
         postgresql_fdw_ogr_packages: "postgresql-{{ postgresql_version }}-ogr-fdw"
+        postgresql_backup_enabled: false
 
     - role: DavidWittman.redis
       vars:
