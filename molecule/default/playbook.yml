@@ -21,9 +21,6 @@
               - postgis
         postgresql_ext_install_postgis: true
         postgresql_ext_postgis_version: "2.5"
-        postgresql_ext_postgis_deps:
-          - libgeos-c1
-          - "postgresql-{{ postgresql_version }}-postgis-{{ postgresql_ext_postgis_version }}"
 
     - role: DavidWittman.redis
       vars:
@@ -32,7 +29,6 @@
     - role: ansible-rapidpro
       vars:
         rapidpro_postgresql_password: rapidpro
-        rapidpro_apt_python_ppa: "ppa:deadsnakes/ppa"
         rapidpro_gdal_version: "1.11.2"
         rapidpro_system_wide_dependencies:
           - build-essential
