@@ -8,6 +8,8 @@
   version: b548097c1a728aae3bb65ca7747b903db25c561a
   scm: git
 
-- src: ANXS.postgresql
+- src: https://github.com/onaio/ansible-postgresql.git
+  name: onaio.postgresql
+  scm: git
 
 - src: DavidWittman.redis

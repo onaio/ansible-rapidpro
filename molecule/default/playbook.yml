@@ -2,7 +2,7 @@
 - name: Converge
   hosts: all
   roles:
-    - role: ANXS.postgresql
+    - role: onaio.postgresql
       vars:
         postgresql_version: 10
         postgresql_users:

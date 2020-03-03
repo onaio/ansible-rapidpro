@@ -57,7 +57,7 @@ The following example playbook sets up RapidPro, PostgreSQL, and Redis:
 ```yml
 hosts: all
   roles:
-    - role: ANXS.postgresql
+    - role: onaio.postgresql
       vars:
         postgresql_version: 10
         postgresql_users:
