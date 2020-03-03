@@ -12,4 +12,12 @@
   name: onaio.postgresql
   scm: git
 
+- src: https://github.com/onaio/ansible-gpg-import.git
+  name: onaio.gpg-import
+  scm: git
+
+- src: https://github.com/onaio/ansible-backup.git
+  name: onaio.backup
+  scm: git
+
 - src: DavidWittman.redis
