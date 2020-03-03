@@ -54,7 +54,6 @@
           - libpq-dev
           - python-psycopg2
           - nodejs
-          - nodejs-legacy
           - npm
           - node-less
           - coffeescript
