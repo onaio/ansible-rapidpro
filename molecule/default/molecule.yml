@@ -3,13 +3,14 @@ dependency:
   name: galaxy
 driver:
   name: docker
-lint:
-  name: yamllint
 platforms:
-  - name: ubuntu-18.04
+  - name: ansible-rapidpro-ubuntu-18.04
     image: solita/ubuntu-systemd:18.04
+    dockerfile: Dockerfile.j2
     privileged: true
     command: /sbin/init
+provisioner:
+  name: ansible
 scenario:
   name: default
   test_sequence:
@@ -24,11 +25,9 @@ scenario:
     - side_effect
     - verify
     - destroy
-provisioner:
-  name: ansible
-  lint:
-    name: ansible-lint
+lint: |
+  set -e
+  yamllint .
+  ansible-lint .
 verifier:
   name: testinfra
-  lint:
-    name: flake8

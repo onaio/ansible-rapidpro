@@ -3,9 +3,14 @@
 
 - src: onaio.mailroom
 
+- src: https://github.com/DavisRayM/python.git
+  name: DavisRayM.python
+  version: 0c10923ef95aaa97ccdf246fce1898330061807a
+  scm: git
+
 - src: https://github.com/onaio/ansible-django.git
   name: onaio.django
-  version: b548097c1a728aae3bb65ca7747b903db25c561a
+  version: minor_changes
   scm: git
 
 - src: https://github.com/onaio/ansible-postgresql.git
