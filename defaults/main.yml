@@ -183,3 +183,4 @@ rapidpro_mailroom_environment_vars:
   MAILROOM_S3_REGION: "{{ rapidpro_s3_region }}"
   MAILROOM_SENTRY_DSN: "{{ rapidpro_mailroom_sentry_dsn }}"
   MAILROOM_SMTP_SERVER: "{{ rapidpro_mailroom_smtp_url }}"
+  MAILROOM_ELASTIC: "{{ rapidpro_elasticsearch_url }}"
