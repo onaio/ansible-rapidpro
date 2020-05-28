@@ -15,7 +15,7 @@ jobs:
           path: "${{ github.repository }}"
 
       - name: Run Molecule tests
-        uses: robertdebock/molecule-action@2.1.0
+        uses: onaio/molecule-action@master
 
   release:
     name: Release
