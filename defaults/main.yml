@@ -103,6 +103,10 @@ rapidpro_twitter_api_secret:
 rapidpro_is_prod: "True"
 rapidpro_segment_io_key:
 rapidpro_django_settings_template_path: "django_checkout_path/temba/settings.py.j2"
+rapidpro_django_python_packages:
+  - python3.6
+  - python3.6-dev
+  - python3-distutils
 rapidpro_codebase_path: "{{ rapidpro_system_user_home }}/app"
 rapidpro_versioned_path: "{{ rapidpro_codebase_path }}-versioned"
 rapidpro_checkout_path: "{{ rapidpro_versioned_path }}/{{ rapidpro_version }}"
