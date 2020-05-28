@@ -19,10 +19,7 @@ rapidpro_file_storage_backend: "storages.backends.s3boto3.S3Boto3Storage"
 rapidpro_python_source_version: "3.6"
 rapidpro_python_version: "python{{ rapidpro_python_source_version }}"
 rapidpro_system_wide_dependencies:
-  - build-essential
   - git
-  - python3.6-dev
-  - python3-distutils
   - libgdal-dev
   - python3-gdal
   - gdal-bin
@@ -30,10 +27,7 @@ rapidpro_system_wide_dependencies:
   - libxslt1-dev
   - lib32ncurses5-dev
   - tcl8.5
-  - postgresql
-  - postgresql-contrib
   - libpq-dev
-  - python-psycopg2
   - nodejs
   - nodejs-dev
   - libssl1.0-dev
@@ -44,7 +38,6 @@ rapidpro_system_wide_dependencies:
 rapidpro_pip_packages:
   - uwsgi
   - setuptools
-  - "gdal=={{ rapidpro_gdal_version }}"
   - numpy
   - pyamqp
 rapidpro_run_init_commands: true
@@ -104,9 +97,14 @@ rapidpro_is_prod: "True"
 rapidpro_segment_io_key:
 rapidpro_django_settings_template_path: "django_checkout_path/temba/settings.py.j2"
 rapidpro_django_python_packages:
+  - build-essential
   - python3.6
   - python3.6-dev
   - python3-distutils
+  - python3-distutils-extra
+  - python-psycopg2
+  - libgdal-dev
+  - python3-gdal
 rapidpro_codebase_path: "{{ rapidpro_system_user_home }}/app"
 rapidpro_versioned_path: "{{ rapidpro_codebase_path }}-versioned"
 rapidpro_checkout_path: "{{ rapidpro_versioned_path }}/{{ rapidpro_version }}"
