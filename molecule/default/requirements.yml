@@ -10,7 +10,6 @@
 
 - src: https://github.com/onaio/ansible-django.git
   name: onaio.django
-  version: minor_changes
   scm: git
 
 - src: https://github.com/onaio/ansible-postgresql.git
