@@ -1,4 +1,4 @@
-onaio - RapidPro [![Build Status](https://travis-ci.org/onaio/ansible-rapidpro.svg?branch=master)](https://travis-ci.org/onaio/ansible-rapidpro)
+onaio - RapidPro ![](https://github.com/onaio/ansible-rapidpro/workflows/CI/badge.svg?master)
 =========
 
 Installs and configures [RapidPro](https://rapidpro.github.io/rapidpro/).
