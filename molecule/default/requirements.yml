@@ -5,7 +5,6 @@
 
 - src: https://github.com/DavisRayM/python.git
   name: DavisRayM.python
-  version: 0c10923ef95aaa97ccdf246fce1898330061807a
   scm: git
 
 - src: https://github.com/onaio/ansible-django.git
