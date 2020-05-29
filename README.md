@@ -1,4 +1,4 @@
-onaio - RapidPro [![Build Status](https://travis-ci.org/onaio/ansible-rapidpro.svg?branch=master)](https://travis-ci.org/onaio/ansible-rapidpro)
+onaio - RapidPro ![](https://github.com/onaio/ansible-rapidpro/workflows/CI/badge.svg?master)
 =========
 
 Installs and configures [RapidPro](https://rapidpro.github.io/rapidpro/).
@@ -57,7 +57,7 @@ The following example playbook sets up RapidPro, PostgreSQL, and Redis:
 ```yml
 hosts: all
   roles:
-    - role: ANXS.postgresql
+    - role: onaio.postgresql
       vars:
         postgresql_version: 10
         postgresql_users:

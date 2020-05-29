@@ -1,3 +1,4 @@
+---
 extends: default
 
 rules:
@@ -7,7 +8,27 @@ rules:
   brackets:
     max-spaces-inside: 1
     level: error
+  colons:
+    max-spaces-after: -1
+    level: error
+  commas:
+    max-spaces-after: -1
+    level: error
+  comments: enable
+  comments-indentation: enable
+  document-start: enable
+  empty-lines:
+    max: 1
+    level: error
+  hyphens:
+    level: error
+  indentation:
+    spaces: 2
+  key-duplicates: enable
   line-length: disable
-  # NOTE(retr0h): Templates no longer fail this lint rule.
-  #               Uncomment if running old Molecule templates.
-  # truthy: disable
+  new-line-at-end-of-file: enable
+  new-lines:
+    type: unix
+  trailing-spaces: enable
+  truthy:
+    check-keys: false

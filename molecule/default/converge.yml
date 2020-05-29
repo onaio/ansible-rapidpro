@@ -1,8 +1,10 @@
 ---
 - name: Converge
   hosts: all
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python3"
   roles:
-    - role: ANXS.postgresql
+    - role: onaio.postgresql
       vars:
         postgresql_version: 10
         postgresql_users:
@@ -21,6 +23,13 @@
               - postgis
         postgresql_ext_install_postgis: true
         postgresql_ext_postgis_version: "2.5"
+        postgresql_ext_postgis_deps:
+          - libgeos-c1v5
+          - "postgresql-{{ postgresql_version }}-postgis-{{ postgresql_ext_postgis_version }}"
+          - "postgresql-{{ postgresql_version }}-postgis-{{ postgresql_ext_postgis_version }}-scripts"
+        postgresql_fdw_mysql_packages: "postgresql-{{ postgresql_version }}-mysql-fdw"
+        postgresql_fdw_ogr_packages: "postgresql-{{ postgresql_version }}-ogr-fdw"
+        postgresql_backup_enabled: false
 
     - role: DavidWittman.redis
       vars:
@@ -29,28 +38,3 @@
     - role: ansible-rapidpro
       vars:
         rapidpro_postgresql_password: rapidpro
-        rapidpro_apt_python_ppa: "ppa:deadsnakes/ppa"
-        rapidpro_gdal_version: "1.11.2"
-        rapidpro_system_wide_dependencies:
-          - build-essential
-          - git
-          - python3.6-dev
-          - python3-distutils-extra
-          - libgdal-dev
-          - python3-gdal
-          - gdal-bin
-          - libxml2-dev
-          - libxslt1-dev
-          - lib32ncurses5-dev
-          - tcl8.5
-          - postgresql
-          - postgresql-contrib
-          - libpq-dev
-          - python-psycopg2
-          - nodejs
-          - nodejs-legacy
-          - npm
-          - node-less
-          - coffeescript
-          - libffi6
-          - libffi-dev
