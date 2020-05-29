@@ -3,11 +3,24 @@
 
 - src: onaio.mailroom
 
-- src: https://github.com/onaio/ansible-django.git
-  name: onaio.django
-  version: b548097c1a728aae3bb65ca7747b903db25c561a
+- src: https://github.com/DavisRayM/python.git
+  name: DavisRayM.python
   scm: git
 
-- src: ANXS.postgresql
+- src: https://github.com/onaio/ansible-django.git
+  name: onaio.django
+  scm: git
+
+- src: https://github.com/onaio/ansible-postgresql.git
+  name: onaio.postgresql
+  scm: git
+
+- src: https://github.com/onaio/ansible-gpg-import.git
+  name: onaio.gpg-import
+  scm: git
+
+- src: https://github.com/onaio/ansible-backup.git
+  name: onaio.backup
+  scm: git
 
 - src: DavidWittman.redis
