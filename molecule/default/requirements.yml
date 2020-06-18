@@ -11,6 +11,10 @@
   name: onaio.django
   scm: git
 
+- src: https://github.com/onaio/ansible-ssl-certificate.git
+  name: onaio.ssl-certificate
+  scm: git
+
 - src: https://github.com/onaio/ansible-postgresql.git
   name: onaio.postgresql
   scm: git
