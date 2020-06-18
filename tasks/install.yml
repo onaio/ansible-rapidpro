@@ -21,3 +21,31 @@
   ignore_errors: true
   become: true
   become_user: "{{ rapidpro_system_user }}"
+
+- name: Install ona-oidc package
+  become: true
+  become_user: "root"
+  pip:
+    name: "git+https://github.com/onaio/ona-oidc.git@{{ rapidpro_oidc_version }}#egg=ona-oidc"
+    state: latest
+    extra_args: "-e"
+    virtualenv: "{{ rapidpro_venv_path }}"
+    virtualenv_python: "{{ rapidpro_python_version }}"
+  when: rapidpro_enable_oidc
+
+- name: Copy over nav template
+  template:
+    src: "../templates/django_checkout_path/temba/templates/includes/nav.haml.j2"
+    dest: "{{ rapidpro_checkout_path }}/templates/includes/nav.haml"
+    owner: "{{ rapidpro_system_user }}"
+    group: "{{ rapidpro_system_group }}"
+    block_start_string: "[%"
+    block_end_string: "%]"
+    variable_start_string: "[{"
+    variable_end_string: "}]"
+    mode: '0644'
+  when:
+    - rapidpro_enable_oidc
+    - rapidpro_oidc_login is not none
+    - rapidpro_oidc_auth_server is not none
+    - rapidpro_oidc_logout is not none

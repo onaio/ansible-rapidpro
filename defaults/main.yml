@@ -18,6 +18,28 @@ rapidpro_gdal_version: "2.2.3"
 rapidpro_file_storage_backend: "storages.backends.s3boto3.S3Boto3Storage"
 rapidpro_python_source_version: "3.6"
 rapidpro_python_version: "python{{ rapidpro_python_source_version }}"
+rapidpro_enable_oidc: false
+rapidpro_oidc_version: "master"
+rapidpro_disable_home_create_account: false
+
+rapidpro_openid_viewset_config:
+  REDIRECT_AFTER_AUTH: "LOGIN_REDIRECT_URL"
+  USE_SSO_COOKIE: "False"
+  USE_AUTH_BACKEND: "True"
+  AUTH_BACKEND: "None"
+  USE_RAPIDPRO_VIEWSET: "True"
+  MAP_CLAIM_TO_MODEL:
+    given_name: '"first_name"'
+    family_name: '"last_name"'
+    preferred_username: '"username"'
+    sub: '"email"'
+
+rapidpro_openid_auth_servers: {}
+
+rapidpro_oidc_login: "oidc:openid_connect_login"
+rapidpro_oidc_logout: "oidc:openid_connect_logout"
+rapidpro_oidc_auth_server: "msft"
+
 rapidpro_system_wide_dependencies:
   - git
   - libgdal-dev
