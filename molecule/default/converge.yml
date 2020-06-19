@@ -30,6 +30,7 @@
         postgresql_fdw_mysql_packages: "postgresql-{{ postgresql_version }}-mysql-fdw"
         postgresql_fdw_ogr_packages: "postgresql-{{ postgresql_version }}-ogr-fdw"
         postgresql_backup_enabled: false
+        postgresql_enable_ssl: false
 
     - role: DavidWittman.redis
       vars:
