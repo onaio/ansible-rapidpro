@@ -28,3 +28,5 @@
   scm: git
 
 - src: DavidWittman.redis
+
+- src: ANXS.postgresql
