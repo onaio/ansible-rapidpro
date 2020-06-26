@@ -8,21 +8,21 @@
       vars:
         postgresql_version: 10
         postgresql_users:
-          - name: rapidpro
-            pass: rapidpro
+          - name: "rapidpro"
+            pass: "rapidpro"
             encrypted: true
         postgresql_databases:
-          - name: rapidpro
-            owner: rapidpro
+          - name: "rapidpro"
+            owner: "rapidpro"
             encoding: "UTF-8"
             hstore: true
             gis: true
         postgresql_database_extensions:
-          - db: rapidpro
+          - db: "rapidpro"
             extensions:
               - postgis
         postgresql_ext_install_postgis: true
-        postgresql_ext_postgis_version: "2.5"
+        postgresql_ext_postgis_version: "2.4"
         postgresql_ext_postgis_deps:
           - libgeos-c1v5
           - "postgresql-{{ postgresql_version }}-postgis-{{ postgresql_ext_postgis_version }}"
@@ -30,6 +30,10 @@
         postgresql_fdw_mysql_packages: "postgresql-{{ postgresql_version }}-mysql-fdw"
         postgresql_fdw_ogr_packages: "postgresql-{{ postgresql_version }}-ogr-fdw"
         postgresql_backup_enabled: false
+        postgresql_enable_ssl: true
+        postgresql_ssl_domain: "db.example.com"
+        postgresql_ssl_ca_key: "{{ lookup('file', 'ssl/root.key') }}"
+        postgresql_ssl_ca_cert: "{{ lookup('file', 'ssl/root.crt') }}"
 
     - role: DavidWittman.redis
       vars:

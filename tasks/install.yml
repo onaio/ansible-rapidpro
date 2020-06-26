@@ -3,7 +3,7 @@
 - name: Update npm to latest
   npm:
     name: npm
-    state: latest # noqa 403
+    state: latest  # noqa 403
     global: true
 
 - name: Install coffee-script & less packages
