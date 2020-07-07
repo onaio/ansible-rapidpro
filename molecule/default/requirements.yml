@@ -3,10 +3,6 @@
 
 - src: onaio.mailroom
 
-- src: https://github.com/DavisRayM/python.git
-  name: DavisRayM.python
-  scm: git
-
 - src: https://github.com/onaio/ansible-django.git
   name: onaio.django
   scm: git
@@ -24,3 +20,11 @@
   scm: git
 
 - src: DavidWittman.redis
+
+- src: https://github.com/onaio/ansible-ssl-certificate.git
+  name: onaio.ssl-certificate
+  scm: git
+
+- name: ANXS.postgresql
+  src: https://github.com/onaio/postgresql.git
+  scm: git

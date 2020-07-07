@@ -104,8 +104,19 @@ MAILROOM_AUTH_TOKEN = None
 # INSTALLED_APPS = INSTALLED_APPS + ('django_nose', 'storages')
 # INSTALLED_APPS = INSTALLED_APPS + ('debug_toolbar', )
 INSTALLED_APPS = INSTALLED_APPS + (
-    'storages', 'raven.contrib.django.raven_compat',
+    'storages',
+    'raven.contrib.django.raven_compat',
+{% if rapidpro_enable_oidc %}
+    'oidc',
+{% endif %}
 )
+
+# Import additional urls
+APP_URLS += [
+{% if rapidpro_enable_oidc %}
+    "oidc.urls",
+{% endif %}
+]
 
 # ----------------------------------------------------------------------------
 # In development, add in extra logging for exceptions and the debug toolbar
@@ -270,3 +281,32 @@ COMPRESS_CSS_HASHING_METHOD = "content"
 COMPRESS_OFFLINE_CONTEXT = dict(
     STATIC_URL=STATIC_URL, base_template="frame.html", brand=BRANDING[DEFAULT_BRAND], debug=False, testing=False
 )
+
+{% if rapidpro_enable_oidc %}
+# -----------------------------------------------------------------------------------
+# Open ID Connect Configuration
+# -----------------------------------------------------------------------------------
+OPENID_CONNECT_VIEWSET_CONFIG = {
+{% for setting_name, setting_value in rapidpro_openid_viewset_config.items() %}
+    {% if setting_value is mapping %}
+    "{{ setting_name }}": {
+        {% for value_name, value in setting_value.items() %}
+            "{{ value_name }}": {{ value }},
+        {% endfor %}
+    }
+    {% else %}
+    "{{ setting_name }}": {{ setting_value }},
+    {% endif %}
+{% endfor %}
+}
+
+OPENID_CONNECT_AUTH_SERVERS = {
+{% for authserver_name, authserver_details in rapidpro_openid_auth_servers.items() %}
+    "{{ authserver_name }}": {
+        {% for detail_name, detail_value in authserver_details.items() %}
+        "{{ detail_name }}": {{ detail_value }},
+        {% endfor %}
+    }
+{% endfor %}
+}
+{% endif %}
