@@ -146,7 +146,7 @@ rapidpro_courier_bind_address: "127.0.0.1"
 rapidpro_courier_port: 8080
 rapidpro_courier_version: "1.2.148"
 rapidpro_courier_domain: "{{ rapidpro_domain }}"
-rapidpro_courier_postgresql_url: "postgres://{{ rapidpro_postgresql_user }}:{{ rapidpro_postgresql_password }}@{{ rapidpro_postgresql_host }}:{{ rapidpro_postgresql_port }}/{{ rapidpro_postgresql_database }}"
+rapidpro_courier_postgresql_url: "postgres://{{ rapidpro_postgresql_user }}:{{ rapidpro_postgresql_password }}@{{ rapidpro_postgresql_host }}:{{ rapidpro_postgresql_port }}/{{ rapidpro_postgresql_database }}?sslmode=require"
 rapidpro_courier_environment_vars:
   COURIER_DOMAIN: "{{ rapidpro_courier_domain }}"
   COURIER_PORT: "{{ rapidpro_courier_port }}"
@@ -172,7 +172,7 @@ rapidpro_install_mailroom: true
 rapidpro_mailroom_version: "0.0.195"
 rapidpro_mailroom_port: 8081
 rapidpro_mailroom_address: 127.0.0.1
-rapidpro_mailroom_postgresql_url: "postgres://{{ rapidpro_postgresql_user }}:{{ rapidpro_postgresql_password }}@{{ rapidpro_postgresql_host }}:{{ rapidpro_postgresql_port }}/{{ rapidpro_postgresql_database }}"
+rapidpro_mailroom_postgresql_url: "postgres://{{ rapidpro_postgresql_user }}:{{ rapidpro_postgresql_password }}@{{ rapidpro_postgresql_host }}:{{ rapidpro_postgresql_port }}/{{ rapidpro_postgresql_database }}?sslmode=require"
 rapidpro_mailroom_redis_url: "{{ rapidpro_redis_database_url }}"
 rapidpro_mailroom_s3_disable_ssl: "false"
 rapidpro_mailroom_s3_force_path_style: "false"
