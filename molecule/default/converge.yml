@@ -3,9 +3,10 @@
   hosts: all
   vars:
     ansible_python_interpreter: "/usr/bin/env python3"
-    monit_setup_mode: True
   roles:
     - role: onaio.monit
+      vars:
+        monit_setup_mode: True
     - role: onaio.postgresql
       vars:
         postgresql_version: 10
