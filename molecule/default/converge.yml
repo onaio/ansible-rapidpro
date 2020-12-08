@@ -6,8 +6,9 @@
   roles:
     - role: onaio.monit
       vars:
-        monit_setup_mode: True
+        monit_setup_mode: true
         slack_monit_endpoint: ""
+        monit_scripts: ["monit"]
     - role: onaio.postgresql
       vars:
         postgresql_version: 10
