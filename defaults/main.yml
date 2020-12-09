@@ -186,7 +186,7 @@ rapidpro_mailroom_librato_username:
 rapidpro_mailroom_sentry_dsn:
 rapidpro_mailroom_fcm_key:
 rapidpro_mailroom_s3_media_prefix: "/media/"
-rapidpro_mailroom_smtp_url: "smtp://{{ rapidpro_smtp_user }}:{{ rapidpro_smtp_password }}@{{ rapidpro_smtp_host }}:{{ rapidpro_smtp_port }}/?from={{ rapidpro_smtp_default_from_email }}"
+rapidpro_mailroom_smtp_url: "smtp://{{ rapidpro_smtp_user }}:{{ rapidpro_smtp_password }}@{{ rapidpro_smtp_host }}:{{ rapidpro_smtp_port }}/?from={{ rapidpro_smtp_default_from_email|urlencode }}"
 rapidpro_mailroom_environment_vars:
   MAILROOM_ADDRESS: "{{ rapidpro_mailroom_address }}"
   MAILROOM_ATTACHMENT_DOMAIN: "{{ rapidpro_domain }}"

@@ -4,6 +4,11 @@
   vars:
     ansible_python_interpreter: "/usr/bin/env python3"
   roles:
+    - role: onaio.monit
+      vars:
+        monit_setup_mode: true
+        slack_monit_endpoint: ""
+        monit_scripts: ["monit"]
     - role: onaio.postgresql
       vars:
         postgresql_version: 10
