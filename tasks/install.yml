@@ -1,9 +1,12 @@
 ---
-# Due to this bug https://github.com/npm/cli/issues/681
+- name: install node
+  shell: |
+    curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && sudo apt-get install -y nodejs
+
 - name: Update npm to latest
   npm:
     name: npm
-    state: latest  # noqa 403
+    state: latest # noqa 403
     global: true
 
 - name: Install coffee-script & less packages
@@ -43,7 +46,7 @@
     block_end_string: "%]"
     variable_start_string: "[{"
     variable_end_string: "}]"
-    mode: '0644'
+    mode: "0644"
   when:
     - rapidpro_enable_oidc
     - rapidpro_oidc_login is not none
@@ -60,5 +63,5 @@
     block_end_string: "%]"
     variable_start_string: "[{"
     variable_end_string: "}]"
-    mode: '0644'
+    mode: "0644"
   when: rapidpro_disable_home_create_account
