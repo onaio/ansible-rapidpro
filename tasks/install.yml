@@ -16,7 +16,7 @@
     global: true
   with_items:
     - less
-    - coffee-script
+    - coffeescript
 
 - name: Install npm packages
   npm:
