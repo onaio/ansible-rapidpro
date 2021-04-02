@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+"""TestInfra tests for the RapidPro role."""
 import os
 
 import testinfra.utils.ansible_runner
@@ -50,6 +52,8 @@ def test_rapidpro_app_files(host):
     assert virtualenv.is_directory
     assert oct(virtualenv.mode) == "0o755"
 
+
+def test_rapidpro_settings(host):
     settings_file = host.file("/home/rapidpro/app/temba/settings.py")
     assert settings_file.exists
     assert settings_file.contains("DEFAULT_THROTTLE_RATES")

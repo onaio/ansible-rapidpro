@@ -1,24 +1,31 @@
 ---
-# Due to this bug https://github.com/npm/cli/issues/681
-- name: Update npm to latest
+# Due to this bug https://github.com/npm/cli/issues/682
+- name: Install n with npm for nodejs management
   npm:
-    name: npm
+    name: n
     state: latest  # noqa 403
     global: true
 
-- name: Install coffee-script & less packages
+- name: Manage nodejs with n
+  command: "n latest && /usr/local/bin/npm update --global npm"
+  args:
+    creates: /usr/local/bin/node
+
+- name: Install coffeescript & less packages
   npm:
     name: "{{ item }}"
     state: present
     global: true
+    executable: /usr/local/bin/npm
   with_items:
     - less
-    - coffee-script
+    - coffeescript
 
 - name: Install npm packages
   npm:
+    ci: true
     path: "{{ rapidpro_checkout_path }}"
-  ignore_errors: true
+    executable: /usr/local/bin/npm
   become: true
   become_user: "{{ rapidpro_system_user }}"
 
