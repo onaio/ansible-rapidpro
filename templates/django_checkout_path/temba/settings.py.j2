@@ -69,6 +69,19 @@ CACHES = {
         }
     }
 }
+
+# -----------------------------------------------------------------------------------
+# Django-rest-framework configuration
+# -----------------------------------------------------------------------------------
+REST_FRAMEWORK["DEFAULT_THROTTLE_RATES"] =  {
+      "v2": "{{ rapidpro_api_throttle_rate }}",
+      "v2.contacts": "{{ rapidpro_api_throttle_rate }}",
+      "v2.messages": "{{ rapidpro_api_throttle_rate }}",
+      "v2.broadcasts": "{{ rapidpro_broadcasts_throttle_rate }}",
+      "v2.runs": "{{ rapidpro_api_throttle_rate }}",
+      "v2.api": "{{ rapidpro_api_throttle_rate }}",
+  }
+
 # ----------------------------------------------------------------------------
 # Need a PostgreSQL database on localhost with postgis extension installed.
 # ----------------------------------------------------------------------------
