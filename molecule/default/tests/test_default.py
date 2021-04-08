@@ -1,9 +1,12 @@
+# -*- coding: utf-8 -*-
+"""TestInfra tests for the RapidPro role."""
 import os
 
 import testinfra.utils.ansible_runner
 
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
-    os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
+    os.environ["MOLECULE_INVENTORY_FILE"]
+).get_hosts("all")
 
 
 def test_rapidpro_service(host):
@@ -48,3 +51,10 @@ def test_rapidpro_app_files(host):
     assert virtualenv.group == "rapidpro"
     assert virtualenv.is_directory
     assert oct(virtualenv.mode) == "0o755"
+
+
+def test_rapidpro_settings(host):
+    settings_file = host.file("/home/rapidpro/app/temba/settings.py")
+    assert settings_file.exists
+    assert settings_file.contains("DEFAULT_THROTTLE_RATES")
+    assert settings_file.contains('"v2": "2500/hour"')

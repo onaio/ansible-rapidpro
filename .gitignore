@@ -1,12 +1,12 @@
+*.pyc
 *.sw[op]
-.DS_Store
 .AppleDouble
+.DS_Store
 .LSOverride
-Icon
-._*
 .Spotlight-V100
 .Trashes
+._*
+.cache
 .vagrant
+Icon
 test
-*.pyc
-
