@@ -216,3 +216,9 @@ rapidpro_mailroom_environment_vars:
   MAILROOM_ELASTIC: "{{ rapidpro_elasticsearch_url }}"
 rapidpro_api_throttle_rate: "2500/hour"
 rapidpro_broadcasts_throttle_rate: "36000/hour"
+
+# Maximum active objects are org can have
+rapidpro_max_active_contactfields = 250
+rapidpro_max_active_contactgroups = 250
+rapidpro_max_active_globals = 250
+
