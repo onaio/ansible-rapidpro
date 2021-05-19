@@ -60,4 +60,6 @@ def test_rapidpro_settings(host):
     assert settings_file.contains('"v2": "2500/hour"')
     assert settings_file.contains('MAX_ACTIVE_CONTACTFIELDS_PER_ORG = 250')
     assert settings_file.contains('MAX_ACTIVE_CONTACTGROUPS_PER_ORG = 250')
+    assert settings_file.contains('MAX_ACTIVE_GLOBALS_PER_ORG = 250')
+
 
