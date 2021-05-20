@@ -82,6 +82,11 @@ REST_FRAMEWORK["DEFAULT_THROTTLE_RATES"] =  {
       "v2.api": "{{ rapidpro_api_throttle_rate }}",
   }
 
+# Maximum active objects are org can have
+MAX_ACTIVE_CONTACTFIELDS_PER_ORG = {{ rapidpro_max_active_contactfields }}
+MAX_ACTIVE_CONTACTGROUPS_PER_ORG = {{ rapidpro_max_active_contactgroups }}
+MAX_ACTIVE_GLOBALS_PER_ORG = {{ rapidpro_max_active_globals }}
+
 # ----------------------------------------------------------------------------
 # Need a PostgreSQL database on localhost with postgis extension installed.
 # ----------------------------------------------------------------------------
