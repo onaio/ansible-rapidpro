@@ -55,7 +55,7 @@ dependencies:
     tags:
       - rapidpro
 
-  - role: onaio.courier
+  - role: courier
     vars:
       courier_environment_vars: "{{ rapidpro_courier_environment_vars }}"
       courier_version: "{{ rapidpro_courier_version }}"
@@ -65,7 +65,7 @@ dependencies:
     tags:
       - courier
 
-  - role: onaio.mailroom
+  - role: mailroom
     vars:
       mailroom_version: "{{ rapidpro_mailroom_version }}"
       mailroom_environment_vars: "{{ rapidpro_mailroom_environment_vars }}"
