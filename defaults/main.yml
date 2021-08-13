@@ -1,5 +1,5 @@
 ---
-rapidpro_version: v5.0.9
+rapidpro_version: v6.4.8
 rapidpro_domains:
   - example.com
 rapidpro_domain: "{{ rapidpro_domains[0] }}"
