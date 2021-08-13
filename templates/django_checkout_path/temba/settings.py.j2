@@ -2,13 +2,11 @@ from __future__ import absolute_import, unicode_literals
 
 import copy
 import os
-import raven
 import warnings
 
 import dj_database_url
 from django.utils.translation import ugettext_lazy as _
 
-from raven.transport.requests import RequestsHTTPTransport
 # import our default settings
 from .settings_common import *  # noqa
 import logging
@@ -123,7 +121,6 @@ MAILROOM_AUTH_TOKEN = None
 # INSTALLED_APPS = INSTALLED_APPS + ('debug_toolbar', )
 INSTALLED_APPS = INSTALLED_APPS + (
     'storages',
-    'raven.contrib.django.raven_compat',
 {% if rapidpro_enable_oidc %}
     'oidc',
 {% endif %}
@@ -224,61 +221,6 @@ MEDIA_ROOT = os.path.join('/', 'home', 'rapidpro', 'media/')
 
 DEFAULT_BRAND = '{{ rapidpro_domain }}'
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'root': {
-        'level': 'WARNING',
-        'handlers': ['console'],
-    },
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-    },
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
-        },
-        'sentry': {
-            'level': 'ERROR',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        },
-        'null': {
-            'level': 'DEBUG',
-            'class': 'logging.NullHandler'
-        }
-    },
-    'loggers': {
-        'pycountry': {
-            'level': 'ERROR',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'django.db.backends': {
-            'level': 'ERROR',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'raven': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'sentry.errors': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'django.security.DisallowedHost': {
-            'handlers': ['null'],
-            'propagate': False,
-        }
-    },
-}
-
 TWITTER_API_KEY = '{{ rapidpro_twitter_api_key }}'
 TWITTER_API_SECRET = '{{ rapidpro_twitter_api_secret }}'
 
@@ -286,11 +228,15 @@ FACEBOOK_APPLICATION_ID = "{{ rapidro_facebook_application_id }}"
 FACEBOOK_APPLICATION_SECRET = "{{ rapidpro_facebook_application_secret }}"
 FACEBOOK_WEBHOOK_SECRET = "{{ rapidpro_facebook_webhook_secret }}"
 
-RAVEN_CONFIG = {
-    'dsn': '{{ rapidpro_raven_dsn }}',
-    'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
-    'transport': RequestsHTTPTransport,
-}
+SENTRY_DSN = ''{{ rapidpro_raven_dsn }}'
+if SENTRY_DSN:  # pragma: no cover
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[DjangoIntegration(), CeleryIntegration(), LoggingIntegration()],
+        send_default_pii=True,
+        traces_sampler=traces_sampler,
+    )
+    ignore_logger("django.security.DisallowedHost")
 
 IS_PROD = {{ rapidpro_is_prod }}
 SEGMENT_IO_KEY = '{{ rapidpro_segment_io_key }}'
