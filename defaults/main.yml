@@ -115,6 +115,11 @@ rapidpro_allowed_hosts:
 rapidpro_send_airtime: "True"
 rapidpro_twitter_api_key:
 rapidpro_twitter_api_secret:
+
+rapidro_facebook_application_id:
+rapidpro_facebook_application_secret:
+rapidpro_facebook_webhook_secret:
+
 rapidpro_is_prod: "True"
 rapidpro_segment_io_key:
 rapidpro_django_settings_template_path: "django_checkout_path/temba/settings.py.j2"
@@ -161,6 +166,8 @@ rapidpro_courier_environment_vars:
   COURIER_AWS_SECRET_ACCESS_KEY: "{{ rapidpro_aws_secret_key }}"
   COURIER_SENTRY_DSN: "{{ rapidpro_courier_sentry_dsn }}"
   COURIER_LOG_LEVEL: "INFO"
+  COURIER_FACEBOOK_APPLICATION_SECRET: "{{ rapidpro_facebook_application_secret }}"
+  COURIER_FACEBOOK_WEBHOOK_SECRET: "{{ rapidpro_facebook_webhook_secret }}"
 rapidpro_courier_sentry_dsn:
 rapidpro_courier_s3_media_bucket: "{{ rapidpro_s3_bucket }}"
 rapidpro_courier_s3_media_prefix: "/attachments/"
