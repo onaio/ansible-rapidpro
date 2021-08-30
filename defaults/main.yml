@@ -1,5 +1,5 @@
 ---
-rapidpro_version: v6.4.8
+rapidpro_version: v6.0.8
 rapidpro_domains:
   - example.com
 rapidpro_domain: "{{ rapidpro_domains[0] }}"
@@ -21,6 +21,8 @@ rapidpro_python_version: "python{{ rapidpro_python_source_version }}"
 rapidpro_enable_oidc: false
 rapidpro_oidc_version: "master"
 rapidpro_disable_home_create_account: false
+rapidpro_django_use_poetry: false
+rapidpro_django_use_regular_old_pip: true
 
 rapidpro_openid_viewset_config:
   REDIRECT_AFTER_AUTH: "LOGIN_REDIRECT_URL"

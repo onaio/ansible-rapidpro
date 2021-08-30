@@ -228,7 +228,7 @@ FACEBOOK_APPLICATION_ID = "{{ rapidro_facebook_application_id }}"
 FACEBOOK_APPLICATION_SECRET = "{{ rapidpro_facebook_application_secret }}"
 FACEBOOK_WEBHOOK_SECRET = "{{ rapidpro_facebook_webhook_secret }}"
 
-SENTRY_DSN = ''{{ rapidpro_raven_dsn }}'
+SENTRY_DSN = '{{ rapidpro_raven_dsn }}'
 if SENTRY_DSN:  # pragma: no cover
     sentry_sdk.init(
         dsn=SENTRY_DSN,

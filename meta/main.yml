@@ -31,8 +31,8 @@ dependencies:
       django_recreate_virtual_env: "{{ rapidpro_recreate_virtual_env }}"
       django_pip_paths:
         - "{{ django_checkout_path }}/pip-freeze.txt"
-      django_use_poetry: true
-      django_use_regular_old_pip: false
+      django_use_poetry: "{{ rapidpro_django_use_poetry }}"
+      django_use_regular_old_pip: "{{ rapidpro_django_use_regular_old_pip }}"
       django_local_settings_path: "{{ django_checkout_path }}/temba/settings.py"
       django_settings_template_path: "{{ rapidpro_django_settings_template_path }}"
       django_init_commands: []
