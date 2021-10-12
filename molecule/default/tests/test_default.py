@@ -29,9 +29,9 @@ def test_rapidpro_app_files(host):
     assert appDir.user == "rapidpro"
     assert appDir.group == "rapidpro"
     assert appDir.is_symlink
-    assert appDir.linked_to == "/home/rapidpro/app-versioned/v5.0.9"
+    assert appDir.linked_to == "/home/rapidpro/app-versioned/v6.0.8"
 
-    appVersionedDir = host.file("/home/rapidpro/app-versioned/v5.0.9")
+    appVersionedDir = host.file("/home/rapidpro/app-versioned/v6.0.8")
     assert appVersionedDir.exists
     assert appVersionedDir.user == "rapidpro"
     assert appVersionedDir.group == "rapidpro"
