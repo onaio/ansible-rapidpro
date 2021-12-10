@@ -20,6 +20,7 @@
   with_items:
     - less
     - coffeescript
+  ignore_errors: true
 
 - name: Install npm packages
   npm:

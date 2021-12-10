@@ -28,6 +28,7 @@ dependencies:
       django_git_version: "{{ rapidpro_version }}"
       django_pip_packages: "{{ rapidpro_pip_packages }}"
       django_service_name: "{{ rapidpro_service_name }}"
+      django_python_virtualenv_version: "{{ rapidpro_django_python_virtualenv_version }}"
       django_recreate_virtual_env: "{{ rapidpro_recreate_virtual_env }}"
       django_pip_paths:
         - "{{ django_checkout_path }}/pip-freeze.txt"

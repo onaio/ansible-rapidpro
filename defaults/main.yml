@@ -13,6 +13,7 @@ rapidpro_system_user: rapidpro
 rapidpro_system_group: rapidpro
 rapidpro_system_user_home: "/home/{{ rapidpro_system_user }}"
 rapidpro_service_name: "{{ rapidpro_system_user }}"
+rapidpro_django_python_virtualenv_version: 20.10.0
 rapidpro_recreate_virtual_env: false
 rapidpro_gdal_version: "2.2.3"
 rapidpro_file_storage_backend: "storages.backends.s3boto3.S3Boto3Storage"
@@ -53,11 +54,10 @@ rapidpro_system_wide_dependencies:
   - tcl8.5
   - libpq-dev
   - nodejs
-  - nodejs-dev
   - libssl1.0-dev
   - node-gyp
-  - npm
   - node-less
+  - python3-venv
   - coffeescript
 rapidpro_pip_packages:
   - uwsgi
