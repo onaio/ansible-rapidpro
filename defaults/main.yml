@@ -230,3 +230,7 @@ rapidpro_broadcasts_throttle_rate: "36000/hour"
 rapidpro_max_active_contactfields: 250
 rapidpro_max_active_contactgroups: 250
 rapidpro_max_active_globals: 250
+rapidpro_extra_allowed_languages:
+  - "swh"
+  - "aeb"
+  - "plt"
