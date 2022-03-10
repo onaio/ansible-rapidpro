@@ -17,9 +17,13 @@
     state: present
     global: true
     executable: /usr/local/bin/npm
+  register: _npm_output
   with_items:
     - less
     - coffeescript
+  failed_when:
+    - _npm_output.rc | default(0) != 0
+    - "'EEXIST: file already exists' not in _npm_output.msg | default('')"
 
 - name: Install npm packages
   npm:
