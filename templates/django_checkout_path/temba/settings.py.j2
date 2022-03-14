@@ -88,8 +88,7 @@ MAX_ACTIVE_GLOBALS_PER_ORG = {{ rapidpro_max_active_globals }}
 # ----------------------------------------------------------------------------
 # Need a PostgreSQL database on localhost with postgis extension installed.
 # ----------------------------------------------------------------------------
-DATABASES = {
-    'default': {
+_default_database_config = {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': '{{ rapidpro_postgresql_database }}',
         'USER': '{{ rapidpro_postgresql_user }}',
@@ -101,7 +100,8 @@ DATABASES = {
         'OPTIONS': {
         }
     }
-}
+
+DATABASES = {"default": _default_database_config, "readonly": _default_database_config.copy()}
 
 # reuse our connections for up to 60 seconds
 DATABASES['default']['CONN_MAX_AGE'] = 60
@@ -229,14 +229,6 @@ FACEBOOK_APPLICATION_SECRET = "{{ rapidpro_facebook_application_secret }}"
 FACEBOOK_WEBHOOK_SECRET = "{{ rapidpro_facebook_webhook_secret }}"
 
 SENTRY_DSN = '{{ rapidpro_raven_dsn }}'
-if SENTRY_DSN:  # pragma: no cover
-    sentry_sdk.init(
-        dsn=SENTRY_DSN,
-        integrations=[DjangoIntegration(), CeleryIntegration(), LoggingIntegration()],
-        send_default_pii=True,
-        traces_sampler=traces_sampler,
-    )
-    ignore_logger("django.security.DisallowedHost")
 
 IS_PROD = {{ rapidpro_is_prod }}
 SEGMENT_IO_KEY = '{{ rapidpro_segment_io_key }}'
