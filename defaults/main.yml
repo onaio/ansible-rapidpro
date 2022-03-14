@@ -65,6 +65,7 @@ rapidpro_pip_packages:
   - setuptools
   - numpy
   - pyamqp
+  - cached-property
 rapidpro_run_init_commands: true
 rapidpro_init_commands:
   - "migrate --noinput"
