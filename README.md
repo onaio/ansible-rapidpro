@@ -79,7 +79,7 @@ hosts: all
 
     - role: DavidWittman.redis
       vars:
-        redis_version: "2.8.9"
+        redis_version: "5.0.6"
 
     - role: rapidpro
       vars:
