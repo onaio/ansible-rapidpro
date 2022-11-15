@@ -5,7 +5,7 @@ import os
 import warnings
 
 import dj_database_url
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 # import our default settings
 from .settings_common import *  # noqa
@@ -49,24 +49,29 @@ ALLOWED_HOSTS = [
     '{{ host }}',
 {% endfor %}
 ]
-# ---------------------------------------------------------------------------
-# Celery Broker & Cache Configuration
-# ---------------------------------------------------------------------------
 
-BROKER_BACKEND = '{{ rapidpro_broker_backend }}'
-BROKER_URL = '{{ rapidpro_broker_url }}'
-
-CACHE_URL = '{{ rapidpro_cache_url }}'
+# -----------------------------------------------------------------------------------
+# Caching using Redis
+# -----------------------------------------------------------------------------------
+REDIS_HOST = "{{ rapidpro_redis_host }}"
+REDIS_PORT = 6379
+REDIS_DB = 10 if TESTING else 15  # we use a redis db of 10 for testing so that we maintain caches for dev
 
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        'LOCATION': CACHE_URL,
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        }
+        "LOCATION": "redis://%s:%s/%s" % (REDIS_HOST, REDIS_PORT, REDIS_DB),
+        "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
     }
 }
+
+# ----------------------------------------------------------------------------
+# In development, perform background tasks in the web thread (synchronously)
+# ----------------------------------------------------------------------------
+CELERY_ALWAYS_EAGER = False
+CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
+CELERY_RESULT_BACKEND = None
+CELERY_BROKER_URL = "redis://%s:%d/%d" % (REDIS_HOST, REDIS_PORT, REDIS_DB)
 
 # -----------------------------------------------------------------------------------
 # Django-rest-framework configuration
@@ -102,7 +107,7 @@ DATABASES = {
         }
     }
 }
-
+DATABASES['readonly'] = DATABASES['default'].copy()
 # reuse our connections for up to 60 seconds
 DATABASES['default']['CONN_MAX_AGE'] = 60
 
@@ -140,12 +145,6 @@ MIDDLEWARE = (
   'temba.middleware.ExceptionMiddleware',
 ) + MIDDLEWARE
 
-# ----------------------------------------------------------------------------
-# In development, perform background tasks in the web thread (synchronously)
-# ----------------------------------------------------------------------------
-CELERY_ALWAYS_EAGER = False
-CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
-CELERY_RESULT_BACKEND = CACHE_URL
 
 ADMINS = (
             ('RapidPro', '{{ rapidpro_admin_email }}'),
@@ -234,7 +233,6 @@ if SENTRY_DSN:  # pragma: no cover
         dsn=SENTRY_DSN,
         integrations=[DjangoIntegration(), CeleryIntegration(), LoggingIntegration()],
         send_default_pii=True,
-        traces_sampler=traces_sampler,
     )
     ignore_logger("django.security.DisallowedHost")
 
